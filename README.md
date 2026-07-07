@@ -22,8 +22,11 @@ Use this playbook when a team needs to answer questions like:
 - Is this repeated backend pain a platform signal or just local duplication?
 - Should this capability stay inside the current service, become a documented pattern, move into a shared helper, become a shared library, enter a skeleton, or wait?
 - When is a service skeleton useful, and when is it just copy-paste with better posture?
-- What changes when platform code is imported, vendored, generated, copied, or locally adapted inside a product?
-- Who owns compatibility, support, exceptions, adoption, and upgrade cost?
+- When is an execution-core Foundation justified before product semantics are stable?
+- Where should metadata/configuration stop, and where should typed execution remain?
+- What changes when platform code is imported, vendored, generated, copied, forked, or locally adapted inside a product?
+- Who owns compatibility, support, exceptions, adoption, upgrade cost, and runtime responsibility?
+- What team topology is needed so platform adoption does not become one architect's private hobby?
 - What should the team do every month so platform discipline does not depend on one architect's memory?
 
 This playbook is not a platform religion. It is a set of decision aids for teams trying to keep reusable code from becoming unmanaged infrastructure folklore.
@@ -41,9 +44,14 @@ This playbook is not a platform religion. It is a set of decision aids for teams
 
 1. Read [`docs/00-introduction.md`](docs/00-introduction.md) to understand the vocabulary and boundaries.
 2. Use [`docs/01-bottom-up-platform-discipline.md`](docs/01-bottom-up-platform-discipline.md) when a full platform is too early, but backend growth already needs discipline.
-3. Use [`docs/04-reuse-mechanisms.md`](docs/04-reuse-mechanisms.md) to choose the smallest useful reuse mechanism.
-4. Use [`docs/05-governance-operating-model.md`](docs/05-governance-operating-model.md) before calling any reusable asset a platform asset.
-5. Use the runbooks when the work becomes recurring.
+3. Use [`docs/02-execution-core-foundation.md`](docs/02-execution-core-foundation.md) when stable execution mechanics justify deliberate Foundation scope.
+4. Use [`docs/03-typed-core-metadata-edges.md`](docs/03-typed-core-metadata-edges.md) when configurable behavior appears and the team needs to keep metadata at bounded semantic edges.
+5. Use [`docs/04-reuse-mechanisms.md`](docs/04-reuse-mechanisms.md) to choose the smallest useful reuse mechanism.
+6. Use [`docs/05-governance-operating-model.md`](docs/05-governance-operating-model.md) before calling any reusable asset a platform asset.
+7. Use [`docs/06-outsourcing-platform-governance.md`](docs/06-outsourcing-platform-governance.md) when client-owned delivery and platform stewardship compete for the same capacity.
+8. Use [`docs/07-platform-productization-for-outsourcing.md`](docs/07-platform-productization-for-outsourcing.md) when reusable assets need productization, not only reuse.
+9. Use [`docs/08-team-topology-and-team-api.md`](docs/08-team-topology-and-team-api.md) when platform adoption depends on support, enablement, interaction mode, and ownership boundaries.
+10. Use the runbooks when the work becomes recurring.
 
 ## Playbook, runbook, template, diagram
 
@@ -54,14 +62,19 @@ This playbook is not a platform religion. It is a set of decision aids for teams
 | Template | What to fill in. | Record a service candidate decision. |
 | Diagram | How to explain the model. | Show the platform signal loop. |
 
-## Current MVP contents
+## Current contents
 
 ### Playbook sections
 
 - [`docs/00-introduction.md`](docs/00-introduction.md)
 - [`docs/01-bottom-up-platform-discipline.md`](docs/01-bottom-up-platform-discipline.md)
+- [`docs/02-execution-core-foundation.md`](docs/02-execution-core-foundation.md)
+- [`docs/03-typed-core-metadata-edges.md`](docs/03-typed-core-metadata-edges.md)
 - [`docs/04-reuse-mechanisms.md`](docs/04-reuse-mechanisms.md)
 - [`docs/05-governance-operating-model.md`](docs/05-governance-operating-model.md)
+- [`docs/06-outsourcing-platform-governance.md`](docs/06-outsourcing-platform-governance.md)
+- [`docs/07-platform-productization-for-outsourcing.md`](docs/07-platform-productization-for-outsourcing.md)
+- [`docs/08-team-topology-and-team-api.md`](docs/08-team-topology-and-team-api.md)
 
 ### Templates
 
@@ -73,6 +86,16 @@ This playbook is not a platform religion. It is a set of decision aids for teams
 - [`templates/generator-candidate-register.md`](templates/generator-candidate-register.md)
 - [`templates/exception-deviation-log.md`](templates/exception-deviation-log.md)
 - [`templates/platform-import-adr.md`](templates/platform-import-adr.md)
+- [`templates/execution-core-scope-map.md`](templates/execution-core-scope-map.md)
+- [`templates/foundation-capability-register.md`](templates/foundation-capability-register.md)
+- [`templates/platform-drift-assessment.md`](templates/platform-drift-assessment.md)
+- [`templates/metadata-edge-candidate.md`](templates/metadata-edge-candidate.md)
+- [`templates/architecture-to-delivery-governance-map.md`](templates/architecture-to-delivery-governance-map.md)
+- [`templates/platform-funding-model.md`](templates/platform-funding-model.md)
+- [`templates/team-api.md`](templates/team-api.md)
+- [`templates/platform-ownership-split.md`](templates/platform-ownership-split.md)
+- [`templates/reusable-asset-productization-checklist.md`](templates/reusable-asset-productization-checklist.md)
+- [`templates/platform-adoption-plan.md`](templates/platform-adoption-plan.md)
 
 ### Runbooks
 
@@ -81,21 +104,41 @@ This playbook is not a platform religion. It is a set of decision aids for teams
 - [`runbooks/shared-library-extraction.md`](runbooks/shared-library-extraction.md)
 - [`runbooks/platform-import-review.md`](runbooks/platform-import-review.md)
 - [`runbooks/monthly-platform-signal-review.md`](runbooks/monthly-platform-signal-review.md)
+- [`runbooks/foundation-scope-review.md`](runbooks/foundation-scope-review.md)
+- [`runbooks/platform-drift-review.md`](runbooks/platform-drift-review.md)
+- [`runbooks/metadata-edge-review.md`](runbooks/metadata-edge-review.md)
+- [`runbooks/execution-core-conformance-review.md`](runbooks/execution-core-conformance-review.md)
+- [`runbooks/architecture-to-delivery-governance.md`](runbooks/architecture-to-delivery-governance.md)
+- [`runbooks/outsourcing-platform-scope-review.md`](runbooks/outsourcing-platform-scope-review.md)
+- [`runbooks/platform-funding-review.md`](runbooks/platform-funding-review.md)
+- [`runbooks/team-topology-review.md`](runbooks/team-topology-review.md)
+- [`runbooks/reusable-asset-productization-review.md`](runbooks/reusable-asset-productization-review.md)
+- [`runbooks/consumer-onboarding.md`](runbooks/consumer-onboarding.md)
+- [`runbooks/platform-asset-deprecation.md`](runbooks/platform-asset-deprecation.md)
 
 ### Diagrams
 
 - [`diagrams/platform-signal-loop.md`](diagrams/platform-signal-loop.md)
 - [`diagrams/promotion-ladder.md`](diagrams/promotion-ladder.md)
 - [`diagrams/platform-import-ownership.md`](diagrams/platform-import-ownership.md)
+- [`diagrams/execution-core-boundary.md`](diagrams/execution-core-boundary.md)
+- [`diagrams/typed-core-metadata-edges.md`](diagrams/typed-core-metadata-edges.md)
+- [`diagrams/foundation-governance-loop.md`](diagrams/foundation-governance-loop.md)
+- [`diagrams/platform-drift-loop.md`](diagrams/platform-drift-loop.md)
+- [`diagrams/platform-team-api.md`](diagrams/platform-team-api.md)
+- [`diagrams/outsourcing-platform-funding-loop.md`](diagrams/outsourcing-platform-funding-loop.md)
+- [`diagrams/platform-ownership-split.md`](diagrams/platform-ownership-split.md)
+- [`diagrams/reusable-asset-productization-funnel.md`](diagrams/reusable-asset-productization-funnel.md)
+- [`diagrams/stream-aligned-vs-platform-team.md`](diagrams/stream-aligned-vs-platform-team.md)
 
 ## Article companion map
 
 | Article type | Recommended repo links |
 |---|---|
 | Platform discipline before platform | `docs/01-bottom-up-platform-discipline.md`, `templates/service-candidate-register.md`, `templates/repeated-service-shape-ledger.md`, `templates/platform-candidate-backlog.md`, `templates/skeleton-readiness-checklist.md`, `templates/generator-candidate-register.md`, `templates/exception-deviation-log.md`, `diagrams/platform-signal-loop.md`, `diagrams/promotion-ladder.md`, `runbooks/monthly-platform-signal-review.md` |
-| Execution-core Foundation under product uncertainty | `docs/04-reuse-mechanisms.md`, `docs/05-governance-operating-model.md` |
-| Platform reuse under outsourcing/client-owned constraints | `templates/platform-import-adr.md`, `runbooks/platform-import-review.md`, `diagrams/platform-import-ownership.md`, `docs/04-reuse-mechanisms.md`, `docs/05-governance-operating-model.md` |
-| Synthesis: reusable code is not a platform | `README.md`, `docs/04-reuse-mechanisms.md`, `docs/05-governance-operating-model.md` |
+| Execution-core Foundation under product uncertainty | [`docs/02-execution-core-foundation.md`](docs/02-execution-core-foundation.md), [`docs/03-typed-core-metadata-edges.md`](docs/03-typed-core-metadata-edges.md), [`templates/execution-core-scope-map.md`](templates/execution-core-scope-map.md), [`templates/foundation-capability-register.md`](templates/foundation-capability-register.md), [`templates/platform-drift-assessment.md`](templates/platform-drift-assessment.md), [`templates/metadata-edge-candidate.md`](templates/metadata-edge-candidate.md), [`runbooks/foundation-scope-review.md`](runbooks/foundation-scope-review.md), [`runbooks/platform-drift-review.md`](runbooks/platform-drift-review.md), [`runbooks/metadata-edge-review.md`](runbooks/metadata-edge-review.md), [`runbooks/execution-core-conformance-review.md`](runbooks/execution-core-conformance-review.md), [`diagrams/execution-core-boundary.md`](diagrams/execution-core-boundary.md), [`diagrams/typed-core-metadata-edges.md`](diagrams/typed-core-metadata-edges.md), [`diagrams/foundation-governance-loop.md`](diagrams/foundation-governance-loop.md) |
+| Platform reuse under outsourcing/client-owned constraints | [`docs/06-outsourcing-platform-governance.md`](docs/06-outsourcing-platform-governance.md), [`docs/07-platform-productization-for-outsourcing.md`](docs/07-platform-productization-for-outsourcing.md), [`docs/08-team-topology-and-team-api.md`](docs/08-team-topology-and-team-api.md), [`templates/platform-funding-model.md`](templates/platform-funding-model.md), [`templates/team-api.md`](templates/team-api.md), [`templates/platform-ownership-split.md`](templates/platform-ownership-split.md), [`templates/reusable-asset-productization-checklist.md`](templates/reusable-asset-productization-checklist.md), [`templates/platform-adoption-plan.md`](templates/platform-adoption-plan.md), [`templates/platform-import-adr.md`](templates/platform-import-adr.md), [`runbooks/outsourcing-platform-scope-review.md`](runbooks/outsourcing-platform-scope-review.md), [`runbooks/platform-funding-review.md`](runbooks/platform-funding-review.md), [`runbooks/platform-import-review.md`](runbooks/platform-import-review.md), [`runbooks/team-topology-review.md`](runbooks/team-topology-review.md), [`runbooks/reusable-asset-productization-review.md`](runbooks/reusable-asset-productization-review.md), [`runbooks/consumer-onboarding.md`](runbooks/consumer-onboarding.md), [`runbooks/platform-asset-deprecation.md`](runbooks/platform-asset-deprecation.md), [`diagrams/platform-import-ownership.md`](diagrams/platform-import-ownership.md), [`diagrams/platform-team-api.md`](diagrams/platform-team-api.md), [`diagrams/outsourcing-platform-funding-loop.md`](diagrams/outsourcing-platform-funding-loop.md), [`diagrams/platform-ownership-split.md`](diagrams/platform-ownership-split.md) |
+| Synthesis: reusable code is not a platform | `README.md`, [`docs/04-reuse-mechanisms.md`](docs/04-reuse-mechanisms.md), [`docs/05-governance-operating-model.md`](docs/05-governance-operating-model.md), [`docs/08-team-topology-and-team-api.md`](docs/08-team-topology-and-team-api.md) |
 
 ## Clean-room and confidentiality posture
 
@@ -115,10 +158,12 @@ This is not:
 - a consulting slide deck in Markdown clothing;
 - a claim that platforms should always be built early;
 - a claim that platforms should always wait;
-- a claim that generators, templates, shared libraries, or product-integrated cores solve governance by themselves.
+- a claim that metadata should replace typed product logic;
+- a claim that outsourcing makes platforms impossible;
+- a claim that generators, templates, shared libraries, imports, vendored code, or product-integrated cores solve governance by themselves.
 
 Adapt it. Do not adopt it blindly.
 
 ## Working principle
 
-Build enough product to see repetition. Keep enough discipline that repetition is visible. Extract only what is stable enough to own. Govern it before shared code becomes shared chaos.
+Build enough product to see repetition. Keep enough discipline that repetition is visible. Standardize stable execution mechanics when they are known. Keep product meaning owned. Productize reusable assets before calling them a platform. Govern the boundary before shared code becomes shared chaos.

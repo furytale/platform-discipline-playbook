@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Decide ownership when platform code is imported, vendored, copied, generated, forked, or locally adapted inside a product.
+Decide ownership when platform code is imported, vendored, copied, squashed, subtree-imported, generated, forked, or locally adapted inside a product.
 
 The core question:
 
@@ -13,11 +13,12 @@ The core question:
 Run this when:
 
 - a product consumes platform code through a versioned dependency;
-- platform code is vendored, copied, or squashed into a product;
+- platform code is vendored, copied, squashed, or subtree-imported into a product;
 - generator output becomes product code;
 - a product forks or locally adapts a platform package;
 - a product-integrated core starts acting like a platform asset;
-- teams are unsure whether the platform or product owns support.
+- teams are unsure whether the platform or product owns support;
+- runtime ownership changes after import.
 
 ## Inputs
 
@@ -26,9 +27,12 @@ Run this when:
 - Product need and delivery constraint.
 - Current platform owner.
 - Current product owner.
+- Upstream owner, if different from platform owner.
 - Compatibility expectations.
 - Expected local adaptations.
 - Support expectations.
+- Runtime ownership expectations.
+- Update, rollback, and sync-back expectations.
 - Existing ADRs or decisions.
 
 Use [`../templates/platform-import-adr.md`](../templates/platform-import-adr.md) during the review.
@@ -53,6 +57,7 @@ Choose one:
 - vendored package;
 - copied module;
 - squashed import;
+- subtree-style import;
 - temporary fork;
 - generator output;
 - manual adaptation;
@@ -90,15 +95,17 @@ Fill the ownership table in the ADR:
 - compatibility;
 - support;
 - runtime baseline;
+- local runtime behavior;
 - product-specific adaptation;
 - testing;
 - documentation;
 - deprecation;
-- migration/upgrade.
+- migration/upgrade;
+- contribution back.
 
 If every row says “shared,” the decision is not finished.
 
-### 5. Define compatibility and sync-back
+### 5. Define compatibility, update path, and sync-back
 
 Ask:
 
@@ -110,9 +117,9 @@ Ask:
 - What happens if divergence becomes permanent?
 - When will this be reviewed again?
 
-### 6. Define support after import
+### 6. Define support and runtime ownership after import
 
-After import, support may change.
+After import, support and runtime ownership may change.
 
 Choose:
 
@@ -124,6 +131,8 @@ Choose:
 
 No support model means no platform import. It is just copied code with optimism.
 
+No runtime owner means code movement did not complete the ownership move.
+
 ### 7. Record risks and decision
 
 Use the ADR risk table. Include at least:
@@ -132,6 +141,7 @@ Use the ADR risk table. Include at least:
 - local changes cannot flow back;
 - compatibility breaks later;
 - support responsibility unclear;
+- runtime ownership unclear;
 - product assumptions leak into reusable asset;
 - imported code becomes unowned.
 
@@ -143,8 +153,10 @@ Every import needs a revisit condition:
 - platform source changes;
 - more consumers appear;
 - support requests increase;
+- runtime ownership changes;
 - temporary fork becomes permanent;
 - product-integrated core becomes the real platform;
+- local adaptation should be upstreamed;
 - asset should be deprecated.
 
 ## Completion criteria
@@ -179,6 +191,10 @@ Block or delay import when:
 - Support and compatibility notes.
 - Sync-back or divergence policy.
 - Monthly signal review item.
+
+## Public-safe reminder
+
+Keep entries generalized and synthetic. Do not record real service names, repository paths, commits, schemas, queue/event/table names, screenshots, logs, vendors, exact timelines, payment/security/compliance details, or identifiable client/project facts.
 
 ## Reminder
 

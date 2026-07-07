@@ -1,8 +1,8 @@
 # Platform Import Ownership
 
-Purpose: show how ownership changes when platform code enters a product through dependency, vendoring, copying, generation, fork, or local adaptation.
+Purpose: show how ownership changes when platform code enters a product through dependency, vendoring, copying, squashed import, subtree-style import, generation, fork, or local adaptation.
 
-This is a clean-room diagram. Do not add real repository names, package names, service names, file paths, commits, vendors, or client-specific topology.
+This is a clean-room diagram. Do not add real names, repository details, service names, schemas, queues/events/tables, vendors, screenshots, logs, exact timelines, or client-specific topology.
 
 ## Mermaid version
 
@@ -12,16 +12,18 @@ flowchart TD
     B --> C[Remains platform-owned through versioned boundary]
     B --> D[Becomes product-owned local adaptation]
     B --> E[Temporary fork with sync-back policy]
-    B --> F[Product-integrated core with explicit governance]
-    B --> G[Shared ownership with named responsibilities]
-    B --> H[Import blocked until ownership is clear]
+    B --> F[Generator output with regeneration policy]
+    B --> G[Product-integrated core with explicit governance]
+    B --> H[Shared ownership with named responsibilities]
+    B --> I[Import blocked until ownership is clear]
 
-    C --> I[Platform owns releases, compatibility, support boundary]
-    D --> J[Product owns local changes, support, divergence]
-    E --> K[Review expiry, sync-back, compatibility]
-    F --> L[Define product/platform split, adoption, support, exceptions]
-    G --> M[Separate responsibility rows; avoid vague shared ownership]
-    H --> N[Clarify owner, support, compatibility before import]
+    C --> J[Platform owns releases, compatibility, support boundary]
+    D --> K[Product owns local changes, support, divergence]
+    E --> L[Review expiry, sync-back, compatibility]
+    F --> M[Product owns generated code unless regeneration policy says otherwise]
+    G --> N[Define product/platform split, adoption, support, exceptions]
+    H --> O[Separate responsibility rows; avoid vague shared ownership]
+    I --> P[Clarify owner, support, runtime, compatibility before import]
 ```
 
 ## ASCII version
@@ -41,13 +43,16 @@ Ownership decision
         +-- becomes temporary fork with sync-back policy
         |       -> review expiry, compatibility, flow-back rules
         |
+        +-- becomes generator output
+        |       -> product owns generated code unless regeneration policy says otherwise
+        |
         +-- becomes product-integrated core with explicit governance
         |       -> define product/platform split, adoption, support, exceptions
         |
         +-- shared ownership with named responsibilities
         |       -> every responsibility has a named owner
         |
-        +-- import blocked until ownership is clear
+        +-- import blocked until ownership, support, runtime, and compatibility are clear
 ```
 
 ## Import mechanism comparison
@@ -55,7 +60,7 @@ Ownership decision
 | Mechanism | Ownership default | Watch for |
 |---|---|---|
 | Versioned dependency | Platform owns releases; product owns adoption. | Upgrade friction and compatibility gaps. |
-| Vendored/copy import | Product often becomes local custodian. | Silent platform boundary loss. |
+| Vendored/copy/squashed/subtree-style import | Product often becomes local custodian. | Silent platform boundary loss. |
 | Temporary fork | Shared intent, local divergence. | Temporary becoming permanent. |
 | Generator output | Product owns generated code unless regeneration policy says otherwise. | Edits that break future regeneration. |
 | Product-integrated core | Product/platform split must be explicit. | Product assumptions leaking into reusable assets. |

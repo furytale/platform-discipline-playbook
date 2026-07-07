@@ -1,10 +1,10 @@
 # Platform Import ADR
 
-Use this ADR when platform code enters a product through a versioned dependency, vendored package, copied module, squashed import, generated output, fork, or local adaptation.
+Use this ADR when platform code enters a product through a versioned dependency, vendored package, copied module, squashed import, subtree-style import, generated output, fork, or local adaptation.
 
 Purpose: make import mechanics visible as ownership mechanics.
 
-Do not include real repository names, file paths, package names, commit hashes, internal links, vendors, schemas, queue names, or client-specific details in public copies.
+Do not include real company names, product names, repository names, file paths, package names, commit hashes, internal links, vendors, schemas, queue names, event names, service names, people names, exact timelines, or client-specific details in public copies.
 
 ---
 
@@ -36,6 +36,7 @@ Choose the mechanism.
 - [ ] Vendored package
 - [ ] Copied module
 - [ ] Squashed import
+- [ ] Subtree-style import
 - [ ] Temporary fork
 - [ ] Generator output
 - [ ] Manual adaptation from reference implementation
@@ -71,11 +72,15 @@ Choose the primary model.
 | Compatibility |  |  |  |
 | Support |  |  |  |
 | Security/runtime baseline |  |  |  |
+| Local runtime behavior |  |  |  |
 | Product-specific adaptation |  |  |  |
 | Testing |  |  |  |
 | Documentation |  |  |  |
 | Deprecation |  |  |  |
 | Migration/upgrade |  |  |  |
+| Contribution back |  |  |  |
+
+If every row says `shared`, the decision is not finished.
 
 ## What remains platform-owned?
 
@@ -93,16 +98,25 @@ Choose the primary model.
 
 - 
 
+## What local changes must flow back?
+
+- 
+
+## What local changes stay product-local?
+
+- 
+
 ## Compatibility policy
 
 | Question | Answer |
 |---|---|
 | Is compatibility with platform source required? | Yes / no / partial |
 | How is compatibility checked? |  |
-| What is the upgrade path? |  |
+| What is the update or upgrade path? |  |
 | What is the rollback path? |  |
 | What is the migration window? |  |
 | Who approves breaking changes? |  |
+| What happens if divergence becomes permanent? |  |
 
 ## Sync-back / contribution policy
 
@@ -122,7 +136,9 @@ Choose the primary model.
 | Escalation path |  |
 | Product team responsibilities |  |
 | Platform team responsibilities |  |
+| Enabling support during adoption |  |
 | Known support gaps |  |
+| Support expiry or review trigger |  |
 
 ## Risks
 
@@ -132,6 +148,7 @@ Choose the primary model.
 | Product-local changes cannot flow back | Low / medium / high | Low / medium / high |  |
 | Compatibility breaks later | Low / medium / high | Low / medium / high |  |
 | Support responsibility unclear | Low / medium / high | Low / medium / high |  |
+| Runtime ownership unclear | Low / medium / high | Low / medium / high |  |
 | Product assumptions leak into platform | Low / medium / high | Low / medium / high |  |
 | Imported code becomes unowned | Low / medium / high | Low / medium / high |  |
 
@@ -154,8 +171,10 @@ Revisit this ADR when:
 - [ ] more products need the same imported capability;
 - [ ] support requests increase;
 - [ ] ownership changes;
+- [ ] runtime ownership changes;
 - [ ] the temporary fork becomes permanent;
 - [ ] product-integrated core becomes the real platform;
+- [ ] local adaptation should be upstreamed;
 - [ ] the asset should be deprecated.
 
 ## Consequences
